@@ -1,0 +1,65 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:1 \n:nil ^:t arch:headline
+#+OPTIONS: author:t broken-links:nil c:nil creator:nil
+#+OPTIONS: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+OPTIONS: timestamp:t title:t toc:t todo:t |:t
+#+TITLE: pcl-test
+#+DATE: <2019-05-11 сб>
+#+AUTHOR: Nick Matvyeyev 
+#+EMAIL: <mnasoft@gmail.com>
+#+LANGUAGE: ru
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 26.1 (Org mode 9.1.9)
+
+* Назначение 
+Проект содержит макросы для выполнения тестирования функций и методов.
+
+Проект основан на материале книги [[http://www.gigamonkeys.com/book/][Practical Common Lisp]].
+* Использование 
+- добавьте :pcl-test в описание вашей системы (обычно в you-system.asd);
+#+BEGIN_SRC lisp
+  ;;;; you-system.asd
+    (defsystem #:you-system
+    ;;; Нечто
+      :depends-on (:pcl-test)
+    ;;; Нечто  
+    )
+#+END_SRC
+
+- добавьте тесты и проверьте результат их выполнения;
+#+BEGIN_SRC lisp
+  (require :pcl-test)
+
+  (pcl:deftest test-1()
+    "Пример использования: (test-1)"
+    (pcl:check (= 1 1)))
+
+  (pcl:deftest test-2()
+    "Пример использования: (test-2)"
+    (pcl:check (/= 1 10)))
+
+  (pcl:deftest test-3()
+    "Пример использования: (test-3)"
+    (pcl:check (= 1 10)))
+
+  (pcl:deftest test-all()
+    "Пример использования: (test-all)"
+    (pcl:combine-results 
+      (test-1)(test-2)(test-3)))
+
+  (test-all)
+#+END_SRC
+
+- результат будет выглядеть так:
+#+BEGIN_SRC 
+pass ... (TEST-ALL TEST-1): (= 1 1)
+pass ... (TEST-ALL TEST-2): (/= 1 10)
+FAIL ... (TEST-ALL TEST-3): (= 1 10)
+
+NIL
+#+END_SRC
+
+
+
+
