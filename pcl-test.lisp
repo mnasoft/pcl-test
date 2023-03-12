@@ -1,6 +1,6 @@
 ;;;; pcl-test.lisp
 
-(in-package #:pcl-test)
+(in-package :pcl-test)
 
 (defvar *test-name* nil)
 

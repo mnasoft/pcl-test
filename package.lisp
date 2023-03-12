@@ -1,6 +1,6 @@
 ;;;; package.lisp
 
-(defpackage #:pcl-test
+(defpackage :pcl-test
   (:use #:cl)
   (:nicknames "PCL")
   (:export  *test-name*
